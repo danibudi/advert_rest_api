@@ -1,0 +1,64 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Dynamic libraries
+*.so
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.py[cod]
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+test_missing.py
+*,cover
+test-*.xml
+coverage-*.xml
+
+# local backup files
+*~
+*#
+*swp
+
+# Database files
+*.rdb
+*.db
+
+# Log files
+*.log
+
+#Translations
+*.mo
+
+.DS_Store
+
+#Running services files
+*.pid
+postgres/
