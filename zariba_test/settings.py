@@ -1,3 +1,4 @@
+from local_settings import *
 """
 Django settings for zariba_test project.
 
@@ -84,3 +85,5 @@ TIME_ZONE = 'Europe/Sofia'
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(os.path.dirname(__file__), '../media/')
