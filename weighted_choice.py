@@ -22,17 +22,26 @@ def advert_choice(distributors_list):
 
 
 def advert_choice_pid(details_list, stat):
-    pass
+    total = sum(stat.values()) or 1
+    errors = ((stat.get(dist, 0) / total / percent, -percent, dist, adv)
+              for dist, percent, adv in details_list)
+    score, score, dist, adv = min(errors)
+    stat[dist] = stat.get(dist, 0) + 1
+    return dist, random.choice(adv)
 
 
 def __main__():
-    distr_percent_advs_list = [(2, 10, [2, 4, 6, 7]), (1, 70, [1, 5, 8]),
+    distr_percent_advs_list = [(2, 10, [2, 4, 6, 7]),
+                               (1, 70, [1, 5, 8]),
                                (3, 20, [9, 10, 11, 12])]
     advert_choised = advert_choice(distr_percent_advs_list)
-    stat = {}
-    advert_choised = advert_choice_pid(distr_percent_advs_list, stat)
     print (advert_choised)
-
+    dists = [dpa[0] for dpa in distr_percent_advs_list]
+    print (dists)
+    stat = {}
+    for ppp in range(20):
+        advert_choised = advert_choice_pid(distr_percent_advs_list, stat)
+        print (advert_choised, stat)
 
 if __name__ == '__main__':
     __main__()
