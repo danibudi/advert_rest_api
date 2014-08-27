@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'mysite.views.home', name='home'),
-    url(r'^ditributor/', include('ditributor.urls', namespace="ditributor")),
+    url(r'^distributor/', include('distributor.urls', namespace="distributor")),
     #~ url(r'^advertisement/', include('advertisement.urls', namespace="advertisement")),
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

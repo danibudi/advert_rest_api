@@ -1,5 +1,5 @@
 from django.contrib import admin
-from ditributor.models import Ditributor, Advertisement
+from distributor.models import Distributor, Advertisement
 
 
 class AdvertisementInline(admin.TabularInline):
@@ -9,7 +9,7 @@ class AdvertisementInline(admin.TabularInline):
 
 
 def make_percent_proportionally(modeladmin, request, queryset):
-    queryset = Ditributor.objects.all()
+    queryset = Distributor.objects.all()
     total_percents = 0
     for p in queryset:
         total_percents += p.show_percent
@@ -19,6 +19,17 @@ def make_percent_proportionally(modeladmin, request, queryset):
         p.save()
 make_percent_proportionally.short_description = "Make percents in the right proportion"
 
+"""
+def make_percent_proportionally_button():
+    queryset = Distributor.objects.all()
+    total_percents = 0
+    for p in queryset:
+        total_percents += p.show_percent
+    proportional_coef = total_percents / 100.00
+    for p in queryset:
+        p.show_percent = round(p.show_percent / proportional_coef)
+        p.save()
+"""
 
 class DistributorAdmin(admin.ModelAdmin):
     inlines = [AdvertisementInline]
@@ -28,7 +39,8 @@ class DistributorAdmin(admin.ModelAdmin):
     list_editable = ['show_percent']
     actions = [make_percent_proportionally]
 
+    #~ change_list_template = 'distributor/admin/change_form.html'
 
 
-admin.site.register(Ditributor, DistributorAdmin)
+admin.site.register(Distributor, DistributorAdmin)
 admin.site.register(Advertisement)

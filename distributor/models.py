@@ -43,7 +43,7 @@ class PercentField(IntegerField):
         return Decimal("%.2f" % (value / 100.0))
 """
 
-class Ditributor(models.Model):
+class Distributor(models.Model):
     name = models.CharField(max_length=200)
     show_percent = models.PositiveSmallIntegerField(default=100, blank=False, null=False)
 
@@ -51,7 +51,7 @@ class Ditributor(models.Model):
             return self.name
 
 class Advertisement(models.Model):
-    ditributor = models.ForeignKey(Ditributor)
+    distributor = models.ForeignKey(Distributor)
     banner = models.ImageField("Banner Image", upload_to='banner_immages/', blank=False, null=False, help_text='Please, upload gif, png format')
     banner_link = models.URLField(_("banner's URL"), blank=False, null=False)
     thumbnail = models.ImageField(upload_to='doc100/', blank=False, null=False, editable=False)
