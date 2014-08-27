@@ -1,3 +1,5 @@
+from __future__ import division
+
 import random
 
 
@@ -31,9 +33,9 @@ def advert_choice_pid(details_list, stat):
 
 
 def __main__():
-    distr_percent_advs_list = [(2, 10, [2, 4, 6, 7]),
-                               (1, 70, [1, 5, 8]),
-                               (3, 20, [9, 10, 11, 12])]
+    distr_percent_advs_list = [('b', 10, [2, 4, 6, 7]),
+                               ('a', 70, [1, 5, 8]),
+                               ('c', 20, [9, 10, 11, 12])]
     advert_choisen = advert_choice(distr_percent_advs_list)
     print (advert_choisen)
     stat = {}
