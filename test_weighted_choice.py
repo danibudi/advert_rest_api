@@ -1,7 +1,7 @@
 import unittest
 import random
 import collections
-from weighted_choice import advert_choice, advert_choice_pid, weighted_choice
+from weighted_choice import advert_choice, advert_choice_pid
 
 
 class Random(unittest.TestCase):

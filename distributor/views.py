@@ -1,3 +1,41 @@
-from django.views import generic
-class IndexView(generic.ListView):
-    template_name = 'distributor/index.html'
+from django.http import JsonResponse
+from django.http import HttpResponseNotFound
+from django.views.decorators.csrf import csrf_exempt
+from distributor.models import make_dist_adv_list, Distributor, Advertisement
+from weighted_choice import advert_choice, advert_choice_pid
+
+
+persistent = {}
+#~ todo: write in db
+
+
+@csrf_exempt
+def advert_select(request):
+    """view for lookup adverts"""
+    if request.method == 'POST':
+        distr_percent_advs_list = make_dist_adv_list()
+        aa = advert_choice(distr_percent_advs_list)
+        distributor = Distributor.objects.get(name=aa[0])
+        a = Advertisement.objects.get(distributor=distributor, id=aa[1])
+        response = JsonResponse({'distributor': a.distributor.name,
+                                 'banner': a.banner.url,
+                                 'banner_link': a.banner_link})
+    else:
+        return HttpResponseNotFound('<h1>use Post instead of GET method</h1>')
+    return response
+
+
+@csrf_exempt
+def advert_select_pid(request):
+    """view for lookup adverts"""
+    if request.method == 'POST':
+        distr_percent_advs_list = make_dist_adv_list()
+        aa = advert_choice_pid(distr_percent_advs_list, persistent)
+        distributor = Distributor.objects.get(name=aa[0])
+        a = Advertisement.objects.get(distributor=distributor, id=aa[1])
+        response = JsonResponse({'distributor': a.distributor.name,
+                                 'banner': a.banner.url,
+                                 'banner_link': a.banner_link})
+    else:
+        return HttpResponseNotFound('<h1>use Post instead of GET method</h1>')
+    return response
