@@ -33,7 +33,7 @@ def make_percent_proportionally_button():
 
 class DistributorAdmin(admin.ModelAdmin):
     inlines = [AdvertisementInline]
-    list_display = ('name', 'show_percent')  #, 'percent'
+    list_display = ('name', 'show_percent', 'shown_adverts')
     list_filter = ['show_percent']
     search_fields = ['name']
     list_editable = ['show_percent']

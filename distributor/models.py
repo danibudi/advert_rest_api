@@ -7,6 +7,8 @@ class Distributor(models.Model):
     name = models.CharField(max_length=200)
     show_percent = models.PositiveSmallIntegerField(
         default=100, blank=False, null=False)
+    shown_adverts = models.PositiveSmallIntegerField(
+        default=0, blank=False, null=False)
 
     def __unicode__(self):              # __str__ on Python 3
             return self.name

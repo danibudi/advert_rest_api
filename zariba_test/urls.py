@@ -5,8 +5,8 @@ from django.conf.urls.static import static
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^advert$', 'distributor.views.advert_select', name='advert'),
-    url(r'^pid$', 'distributor.views.advert_select_pid', name='pid'),
+    url(r'^advert/$', 'distributor.views.advert_select', name='advert'),
+    url(r'^pid/$', 'distributor.views.advert_select_pid', name='pid'),
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
