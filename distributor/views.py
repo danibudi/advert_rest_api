@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.http import HttpResponseNotFound
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import F
 from distributor.models import make_dist_adv_list, Distributor, Advertisement
 from weighted_choice import advert_choice, advert_choice_pid
 from django.http import HttpResponse
@@ -16,12 +17,9 @@ def advert_select(request):
     if request.method == 'POST':
         distr_percent_advs_list = make_dist_adv_list()
         aa = advert_choice(distr_percent_advs_list)
-        a = Advertisement.objects.get(id=aa[1])
-        distributor = Distributor.objects.get(name=a.distributor.name)
-        distributor.shown_adverts += 1
-        distributor.save()
-        response = JsonResponse({'distributor': a.distributor.name,
-                                 'banner': a.banner.url,
+        a = Advertisement.objects.get(pk=aa[1])
+        Distributor.objects.filter(pk=aa[0]).update(shown_adverts=F('shown_adverts')+1)
+        response = JsonResponse({'banner': a.banner.url,
                                  'banner_link': a.banner_link})
     else:
         return HttpResponseNotFound('<h1>use Post instead of GET method</h1>')
@@ -34,12 +32,9 @@ def advert_select_pid(request):
     if request.method == 'POST':
         distr_percent_advs_list = make_dist_adv_list()
         aa = advert_choice_pid(distr_percent_advs_list, persistent)
-        distributor = Distributor.objects.get(name=aa[0])
-        a = Advertisement.objects.get(distributor=distributor, id=aa[1])
-        distributor.shown_adverts = persistent[distributor.name]
-        distributor.save()
-        response = JsonResponse({'distributor': a.distributor.name,
-                                 'banner': a.banner.url,
+        a = Advertisement.objects.get(id=aa[1])
+        Distributor.objects.filter(pk=aa[0]).update(shown_adverts=F('shown_adverts')+1)
+        response = JsonResponse({'banner': a.banner.url,
                                  'banner_link': a.banner_link})
     else:
         return HttpResponseNotFound('<h1>use Post instead of GET method</h1>')

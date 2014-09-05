@@ -57,9 +57,7 @@ class TestDistributorImpls(TestCase):
 
         for dist in distributors:
             adverts_distr_list = [adv.id for adv in dist.advertisement_set.all()]
-            distr_percent_advs_list.append((dist.name,
-                                            dist.show_percent,
-                                            adverts_distr_list))
+            distr_percent_advs_list.append((dist.id, dist.show_percent, adverts_distr_list))
         for target in distr_percent_advs_list:
             self.assertIn(target, dist_adv_list)
         self.assertTrue(len(target) <= len(dist_adv_list))

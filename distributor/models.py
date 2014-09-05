@@ -35,5 +35,5 @@ def make_dist_adv_list():
     for dist in distributors:
         adverts_distr_list = [adv.id for adv in dist.advertisement_set.all()]
         distr_percent_advs_list.append(
-            (dist.name, dist.show_percent, adverts_distr_list))
+            (dist.id, dist.show_percent, adverts_distr_list))
     return distr_percent_advs_list
